@@ -1,0 +1,88 @@
+.table
+  .ant-table-title
+    margin-bottom: 20px
+    padding: 0
+
+  &_title
+    display: flex
+    justify-content: space-between
+
+    &_theme
+      display: flex
+      align-items: center
+
+      &_text
+        margin: 0 !important
+
+      &_name
+        font-size: 18px
+        padding-left: 10px
+
+    &_input-group
+      display: flex
+
+      &_button
+        margin-left: 15px
+
+  &_actions
+    display: flex
+
+    &_icon
+      font-size: 16px
+
+//ANSWERS
+
+.answers
+  padding-left: 50px
+
+  .answer
+
+    &_row
+      margin-bottom: 20px
+
+
+      &:last-child
+        margin-bottom: 0
+
+      &:hover .visible
+        display: flex
+
+    &_actions
+      display: none
+
+    &_group
+      display: flex
+      align-items: center
+
+      &_input
+        background: transparent
+        border: 0
+        padding: 5px 11px
+        margin-right: 20px
+
+        &:hover, &:focus
+          box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2)
+
+        &:disabled
+          color: #505050
+
+      .correct
+        box-shadow: 0 0 0 1px rgb(61, 255, 0)
+
+      &_checkbox
+        width: 20%
+
+  &_add
+    margin-top: 20px
+
+    &_group
+      display: flex
+      align-items: center
+
+      &_input
+        width: 100%
+        margin-right: 20px !important
+
+      &_checkbox
+        width: 20%
+
