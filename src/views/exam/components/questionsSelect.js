@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { List, Checkbox } from "antd";
-import { getThemes, setExamThemes } from "../../../actions";
+import { getExamQuestions, setExamQuestions } from "../../../actions";
 import { connect } from "react-redux";
 
 const QuestionsSelect = (props) => {
   const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   props.getThemes();
-  // }, []);
 
-  const selectingTheme = (item, e) => {
+  useEffect(() => {
+    props.getExamQuestions();
+  }, []);
+
+  const selectingItem = (item, e) => {
     if (e.target.checked) {
       setData([...data, item]);
     } else {
-      const filteredList = data.filter((theme) => theme !== item);
+      const filteredList = data.filter((el) => el !== item);
       setData(filteredList);
     }
   };
-  const themesList = (item) => {
+
+  useEffect(() => {
+    props.setExamQuestions(data);
+  }, [data]);
+
+  const itemsList = (item) => {
     return (
       <List.Item>
-        <Checkbox onChange={(e) => selectingTheme(item, e)}>
+        <Checkbox onChange={(e) => selectingItem(item, e)}>
           {item.name}
         </Checkbox>
       </List.Item>
@@ -32,8 +38,8 @@ const QuestionsSelect = (props) => {
         size="small"
         bordered
         loading={props.loading}
-        dataSource={[]}
-        renderItem={(item, index) => themesList(item, index)}
+        dataSource={props.questions}
+        renderItem={(item, index) => itemsList(item, index)}
       />
     </div>
   );
@@ -42,12 +48,13 @@ const QuestionsSelect = (props) => {
 const mapStateToProps = (state) => {
   return {
     themes: state.exam.themes,
+    questions: state.exam.questionsList,
     loading: state.loading,
   };
 };
 
 const mapDispatchToProps = {
-  getThemes,
-  setExamThemes,
+  getExamQuestions,
+  setExamQuestions,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsSelect);

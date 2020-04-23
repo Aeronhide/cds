@@ -28,7 +28,9 @@ export const DELETE_ANSWER = "DELETE_ANSWER";
 
 export const SET_EXAM_THEMES = "SET_EXAM_THEMES";
 export const SET_EXAM_QUESTIONS = "SET_EXAM_QUESTIONS";
+export const SET_EXAM_SETTINGS = "SET_EXAM_SETTINGS";
 export const SET_EXAM_DURATION = "SET_EXAM_DURATION";
+export const CREATE_EXAM = "CREATE_EXAM";
 export const START_EXAM = "START_EXAM";
 export const END_EXAM = "END_EXAM";
 export const FINISH_EXAM = "FINISH_EXAM";

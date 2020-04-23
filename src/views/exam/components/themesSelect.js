@@ -5,15 +5,16 @@ import { connect } from "react-redux";
 
 const ThemesSelect = (props) => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     props.getThemes();
   }, []);
 
-  const selectingTheme = (item, e) => {
+  const selectingItem = (item, e) => {
     if (e.target.checked) {
       setData([...data, item]);
     } else {
-      const filteredList = data.filter((theme) => theme !== item);
+      const filteredList = data.filter((el) => el !== item);
       setData(filteredList);
     }
   };
@@ -22,10 +23,10 @@ const ThemesSelect = (props) => {
     props.setExamThemes(data);
   }, [data]);
 
-  const themesList = (item) => {
+  const itemsList = (item) => {
     return (
       <List.Item>
-        <Checkbox onChange={(e) => selectingTheme(item, e)}>
+        <Checkbox onChange={(e) => selectingItem(item, e)}>
           {item.name}
         </Checkbox>
       </List.Item>
@@ -38,7 +39,7 @@ const ThemesSelect = (props) => {
         bordered
         loading={props.loading}
         dataSource={props.themes}
-        renderItem={(item, index) => themesList(item, index)}
+        renderItem={(item, index) => itemsList(item, index)}
       />
     </div>
   );

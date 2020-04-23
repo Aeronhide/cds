@@ -3,6 +3,8 @@ import {
   SET_EXAM_QUESTIONS,
   GET_EXAM_QUESTIONS,
   SET_EXAM_THEMES,
+  SET_EXAM_SETTINGS,
+  CREATE_EXAM,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -19,9 +21,18 @@ const examReducer = (state = initialState, action) => {
         themes: action.themes,
       };
     case GET_EXAM_QUESTIONS:
+      const filteredQuestions = state.themes
+        .map(
+          (t) =>
+            action.questionsList &&
+            action.questionsList.filter((q) => q.themeId === t.key)
+        )
+        .flat();
+      // example without flat()
+      // filtered.reduce((acc, val) => acc.concat(val), []);
       return {
         ...state,
-        questionsList: action.questionsList,
+        questionsList: filteredQuestions,
       };
     case SET_EXAM_QUESTIONS:
       return {
@@ -32,6 +43,16 @@ const examReducer = (state = initialState, action) => {
       return {
         ...state,
         duration: action.duration,
+      };
+    case SET_EXAM_SETTINGS:
+      return {
+        ...state,
+        settings: action.settings,
+      };
+    case CREATE_EXAM:
+      return {
+        ...state,
+        exam: action.exam,
       };
     default:
       return state;

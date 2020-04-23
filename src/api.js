@@ -4,6 +4,7 @@ const db = firebase.firestore();
 const themes = db.collection("themes");
 const questions = db.collection("questions");
 const answers = db.collection("answers");
+const exam = db.collection("exam");
 
 export default {
   themes: {
@@ -34,5 +35,9 @@ export default {
         isTrue: answer.isTrue,
       }),
     deleteAnswer: (answer) => answers.doc(`${answer}`).delete(),
+  },
+  exam: {
+    createExam: (data) => exam.add(data),
+    getExam: () => exam.get(),
   },
 };

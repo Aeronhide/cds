@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Steps, Button, message } from "antd";
 import ThemesSelect from "./themesSelect";
 import QuestionsSelect from "./questionsSelect";
-import "../style.sass";
 import ExamSettings from "./examSettings";
+import { createExam } from "../../../actions";
+import "../style.sass";
 
-const ExamSetUp = () => {
+const ExamSetUp = (props) => {
   const [current, setCurrent] = useState(0);
   const { Step } = Steps;
 
@@ -43,6 +45,12 @@ const ExamSetUp = () => {
   const prev = () => {
     setCurrent(current - 1);
   };
+
+  const addExam = () => {
+    message.success("Exam created!");
+    props.createExam({ ...props.questions, ...props.settings });
+  };
+
   return (
     <div>
       <Steps current={current}>
@@ -58,10 +66,7 @@ const ExamSetUp = () => {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success("Processing complete!")}
-          >
+          <Button type="primary" onClick={addExam}>
             Done
           </Button>
         )}
@@ -74,5 +79,15 @@ const ExamSetUp = () => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    questions: state.exam.questionsSelected,
+    settings: state.exam.settings,
+    loading: state.loading,
+  };
+};
 
-export default ExamSetUp;
+const mapDispatchToProps = {
+  createExam,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ExamSetUp);
