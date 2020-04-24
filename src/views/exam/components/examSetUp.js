@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Steps, Button, message } from "antd";
 import ThemesSelect from "./themesSelect";
 import QuestionsSelect from "./questionsSelect";
@@ -8,8 +9,10 @@ import { createExam } from "../../../actions";
 import "../style.sass";
 
 const ExamSetUp = (props) => {
-  const [current, setCurrent] = useState(0);
   const { Step } = Steps;
+  const [current, setCurrent] = useState(0);
+  const date = new Date();
+  const history = useHistory();
 
   const steps = [
     {
@@ -47,8 +50,12 @@ const ExamSetUp = (props) => {
   };
 
   const addExam = () => {
-    message.success("Exam created!");
-    props.createExam({ ...props.questions, ...props.settings });
+    props.createExam({
+      questions: props.questions,
+      settings: props.settings,
+      key: date.getTime(),
+    });
+    message.success("Exam created!", 2, history.push("/setting-exams"));
   };
 
   return (
@@ -81,8 +88,8 @@ const ExamSetUp = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    questions: state.exam.questionsSelected,
-    settings: state.exam.settings,
+    questions: state.exams.questionsSelected,
+    settings: state.exams.settings,
     loading: state.loading,
   };
 };

@@ -2,6 +2,7 @@ import { Exam, Home, NotFound, Profile, Schedule, Themes } from "../views";
 import { Main, Minimal } from "../layouts";
 import Questions from "../views/themes/components/questions";
 import ExamSetUp from "../views/exam/components/examSetUp";
+import SettingExams from "../views/exam/components/settingExams";
 
 export const routes = [
   {
@@ -33,8 +34,15 @@ export const routes = [
     exact: true,
   },
   {
-    title: "Exam",
-    path: "/exam/set-up",
+    title: "Setting exams",
+    path: "/setting-exams",
+    component: SettingExams,
+    layout: Main,
+    exact: true,
+  },
+  {
+    title: "Exam set-up",
+    path: "/setting-exams/set-up",
     component: ExamSetUp,
     layout: Main,
     exact: true,

@@ -6,14 +6,14 @@ import {
   globalReducer,
   questionsReducer,
   answersReducer,
-  examReducer,
+  examsReducer,
 } from "./reducers";
 
 const rootReducer = combineReducers({
   themes: themesReducer,
   questions: questionsReducer,
   answers: answersReducer,
-  exam: examReducer,
+  exams: examsReducer,
   loading: globalReducer,
 });
 

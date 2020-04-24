@@ -24,14 +24,20 @@ export const ADD_ANSWER = "ADD_ANSWER";
 export const EDIT_ANSWER = "EDIT_ANSWER";
 export const DELETE_ANSWER = "DELETE_ANSWER";
 
-//EXAM
+//EXAMS
 
 export const SET_EXAM_THEMES = "SET_EXAM_THEMES";
 export const SET_EXAM_QUESTIONS = "SET_EXAM_QUESTIONS";
 export const SET_EXAM_SETTINGS = "SET_EXAM_SETTINGS";
 export const SET_EXAM_DURATION = "SET_EXAM_DURATION";
 export const CREATE_EXAM = "CREATE_EXAM";
+export const DELETE_EXAM = "DELETE_EXAM";
+export const LOAD_EXAMS = "LOAD_EXAMS";
+export const SELECT_EXAM = "SELECT_EXAM";
+export const GET_EXAM_QUESTIONS = "GET_EXAM_QUESTIONS";
+
+//EXAM
+
 export const START_EXAM = "START_EXAM";
 export const END_EXAM = "END_EXAM";
 export const FINISH_EXAM = "FINISH_EXAM";
-export const GET_EXAM_QUESTIONS = "GET_EXAM_QUESTIONS";

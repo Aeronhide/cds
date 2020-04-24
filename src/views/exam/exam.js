@@ -1,17 +1,16 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { Button } from "antd";
+import { connect } from "react-redux";
 
-const Exam = () => {
-  return (
-    <div className="exam">
-      <div className="exam_empty">
-        <Button type="primary">
-          <NavLink to="/exam/set-up">Add Exam</NavLink>
-        </Button>
-      </div>
-    </div>
-  );
+const Exam = (props) => {
+  console.warn("exam", props.exam);
+  return <div className="exam">exam</div>;
+};
+const mapStateToProps = (state) => {
+  return {
+    exam: state.exams.exam,
+    loading: state.loading,
+  };
 };
 
-export default Exam;
+const mapDispatchToProps = {};
+export default connect(mapStateToProps, mapDispatchToProps)(Exam);

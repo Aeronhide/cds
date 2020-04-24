@@ -5,6 +5,8 @@ import {
   SET_EXAM_THEMES,
   SET_EXAM_SETTINGS,
   CREATE_EXAM,
+  LOAD_EXAMS,
+  SELECT_EXAM,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -13,7 +15,7 @@ const initialState = {
   duration: {},
 };
 
-const examReducer = (state = initialState, action) => {
+const examsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_EXAM_THEMES:
       return {
@@ -49,7 +51,12 @@ const examReducer = (state = initialState, action) => {
         ...state,
         settings: action.settings,
       };
-    case CREATE_EXAM:
+    case LOAD_EXAMS:
+      return {
+        ...state,
+        examsList: action.examsList,
+      };
+    case SELECT_EXAM:
       return {
         ...state,
         exam: action.exam,
@@ -59,4 +66,4 @@ const examReducer = (state = initialState, action) => {
   }
 };
 
-export { examReducer };
+export { examsReducer };

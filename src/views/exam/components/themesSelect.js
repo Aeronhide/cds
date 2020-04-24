@@ -8,7 +8,7 @@ const ThemesSelect = (props) => {
 
   useEffect(() => {
     props.getThemes();
-  }, []);
+  }, [props]);
 
   const selectingItem = (item, e) => {
     if (e.target.checked) {
@@ -21,7 +21,7 @@ const ThemesSelect = (props) => {
 
   useEffect(() => {
     props.setExamThemes(data);
-  }, [data]);
+  });
 
   const itemsList = (item) => {
     return (

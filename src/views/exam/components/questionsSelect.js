@@ -8,7 +8,7 @@ const QuestionsSelect = (props) => {
 
   useEffect(() => {
     props.getExamQuestions();
-  }, []);
+  }, [props]);
 
   const selectingItem = (item, e) => {
     if (e.target.checked) {
@@ -21,7 +21,7 @@ const QuestionsSelect = (props) => {
 
   useEffect(() => {
     props.setExamQuestions(data);
-  }, [data]);
+  });
 
   const itemsList = (item) => {
     return (
@@ -47,8 +47,8 @@ const QuestionsSelect = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    themes: state.exam.themes,
-    questions: state.exam.questionsList,
+    themes: state.exams.themes,
+    questions: state.exams.questionsList,
     loading: state.loading,
   };
 };
