@@ -30,7 +30,7 @@ export const routes = [
     title: "Exam",
     path: "/exam",
     component: Exam,
-    layout: Main,
+    layout: Minimal,
     exact: true,
   },
   {
