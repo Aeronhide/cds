@@ -38,6 +38,7 @@ export const GET_EXAM_QUESTIONS = "GET_EXAM_QUESTIONS";
 
 //EXAM
 
+export const GET_EXAM = "GET_EXAM";
 export const START_EXAM = "START_EXAM";
 export const END_EXAM = "END_EXAM";
 export const FINISH_EXAM = "FINISH_EXAM";

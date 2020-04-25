@@ -15,8 +15,8 @@ const SettingExams = (props) => {
     props.loadExams();
   }, []);
 
-  const selectExam = (exam) => {
-    props.selectExam(exam);
+  const selectExam = (item) => {
+    props.selectExam(item);
     history.push("/exam");
   };
 

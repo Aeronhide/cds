@@ -7,7 +7,6 @@ import {
   CREATE_EXAM,
   LOAD_EXAMS,
   DELETE_EXAM,
-  SELECT_EXAM,
 } from "../constants/actionTypes";
 import api from "../api";
 
@@ -82,13 +81,4 @@ export const deleteExam = (exam) => (dispatch) => {
       dispatch({ type: LOADING, payload: false });
     });
   });
-};
-
-export const selectExam = (data) => (dispatch) => {
-  dispatch({ type: LOADING, payload: true });
-  dispatch({
-    type: SELECT_EXAM,
-    exam: data,
-  });
-  dispatch({ type: LOADING, payload: false });
 };

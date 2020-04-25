@@ -5,6 +5,7 @@ const themes = db.collection("themes");
 const questions = db.collection("questions");
 const answers = db.collection("answers");
 const exams = db.collection("exams");
+const exam = db.collection("exam");
 
 export default {
   themes: {
@@ -40,5 +41,9 @@ export default {
     createExam: (data) => exams.doc(`${data.key}`).set(data),
     loadExams: () => exams.get(),
     deleteExam: (exam) => exams.doc(`${exam.key}`).delete(),
+  },
+  exam: {
+    selectExam: (data) => exam.doc("1").set(data),
+    getExam: () => exam.get(),
   },
 };

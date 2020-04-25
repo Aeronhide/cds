@@ -7,6 +7,7 @@ import {
   questionsReducer,
   answersReducer,
   examsReducer,
+  examReducer,
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   questions: questionsReducer,
   answers: answersReducer,
   exams: examsReducer,
+  exam: examReducer,
   loading: globalReducer,
 });
 

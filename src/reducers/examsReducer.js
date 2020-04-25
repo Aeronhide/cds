@@ -56,11 +56,6 @@ const examsReducer = (state = initialState, action) => {
         ...state,
         examsList: action.examsList,
       };
-    case SELECT_EXAM:
-      return {
-        ...state,
-        exam: action.exam,
-      };
     default:
       return state;
   }

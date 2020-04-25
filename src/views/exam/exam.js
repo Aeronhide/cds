@@ -1,13 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import "./style.sass";
+import TeacherExamView from "./components/teacherExamView";
 
 const Exam = (props) => {
-  console.warn("exam", props.exam);
-  return <div className="exam">exam</div>;
+  return (
+    <div className="exam">
+      <TeacherExamView />
+    </div>
+  );
 };
 const mapStateToProps = (state) => {
   return {
-    exam: state.exams.exam,
     loading: state.loading,
   };
 };
