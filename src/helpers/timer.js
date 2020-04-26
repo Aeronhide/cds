@@ -12,23 +12,24 @@ const Timer = ({ time, paused }) => {
   });
 
   const tick = () => {
-    // if (!paused) return;
-    if (h > 0 && m === 0 && s === 0) {
+    if (!paused) return;
+    if (t.seconds > 0) {
       setT({
-        hours: t.hours - 1,
-        minutes: 59,
-        seconds: 59,
+        hours: t.hours,
+        minutes: t.minutes,
+        seconds: t.seconds - 1,
       });
-    } else if (s === 0) {
+    } else if (t.minutes > 0 && t.seconds === 0) {
       setT({
         hours: t.hours,
         minutes: t.minutes - 1,
         seconds: 59,
       });
-    } else {
+    } else if (t.hours > 0 && t.minutes === 0 && t.seconds === 0) {
       setT({
-        minutes: t.minutes,
-        seconds: t.seconds - 1,
+        hours: t.hours - 1,
+        minutes: 59,
+        seconds: 59,
       });
     }
   };
@@ -40,6 +41,7 @@ const Timer = ({ time, paused }) => {
       return () => clearInterval(timer);
     }
   }, [paused, tick]);
+
   return (
     <div>
       {t.hours.toString().padStart(2, "0") +
