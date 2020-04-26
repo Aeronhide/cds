@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {
   Card,
   Row,
@@ -13,25 +14,18 @@ import {
 import { getAnswers, getExam } from "../../../actions";
 import Timer from "../../../helpers/timer";
 
-const TeacherExamView = (props) => {
+const TeacherExamView = ({
+  count,
+  setCount,
+  settings,
+  questions,
+  answers,
+  students,
+}) => {
   const { Title } = Typography;
-  const [count, setCount] = useState(false);
-  const settings = props.exam && props.exam.settings;
-  const questions = props.exam && props.exam.questions;
-  const examiners = settings && settings.examiners;
-  const students = [
-    { name: "Charlie Brown", status: "connected" },
-    { name: "Charlie Brown", status: "disconnected" },
-    { name: "Charlie Brown", status: "finished" },
-    { name: "Charlie Brown", status: "connected" },
-  ];
-  useEffect(() => {
-    props.getExam();
-    props.getAnswers();
-  }, []);
 
   return (
-    <div className="exam-view">
+    <div className="teacher-view">
       {settings && settings.duration && (
         <Row gutter={16}>
           <Col xs={24} md={12}>
@@ -41,8 +35,8 @@ const TeacherExamView = (props) => {
                   <Row key={i}>
                     <Col md={24}>
                       <Card className="exam-card" title={q.name}>
-                        {props.answers &&
-                          props.answers
+                        {answers &&
+                          answers
                             .filter((an) => an.questionId === q.key)
                             .map((a) => (
                               <div
@@ -61,7 +55,7 @@ const TeacherExamView = (props) => {
             </Card>
           </Col>
           <Col xs={24} md={12}>
-            <Card className="exam-view-settings">
+            <Card className="teacher-view-settings">
               <Row>
                 <Col md={4}>
                   <Title className="title" level={4}>
@@ -97,10 +91,12 @@ const TeacherExamView = (props) => {
                 </Col>
                 <Col md={4}>
                   <Title level={4}>
-                    {examiners &&
-                      examiners.map((ex, index) => (
+                    {settings &&
+                      settings.examiners.map((ex, index) => (
                         <span key={index}>
-                          {index !== examiners.length - 1 ? ex + ", " : ex}
+                          {index !== settings.examiners.length - 1
+                            ? ex + ", "
+                            : ex}
                         </span>
                       ))}
                   </Title>
@@ -158,10 +154,17 @@ const TeacherExamView = (props) => {
   );
 };
 
+TeacherExamView.propTypes = {
+  count: PropTypes.bool,
+  setCount: PropTypes.func,
+  settings: PropTypes.object,
+  students: PropTypes.array,
+  questions: PropTypes.array,
+  answers: PropTypes.array,
+};
+
 const mapStateToProps = (state) => {
   return {
-    exam: state.exam,
-    answers: state.answers,
     loading: state.loading,
   };
 };
