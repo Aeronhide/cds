@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getExam, getAnswers } from "../../actions";
+import { getExam, getAnswers, startExam } from "../../actions";
 import TeacherExamView from "./components/teacherExamView";
 import StudentExamView from "./components/studentExamView";
 import "./style.sass";
@@ -8,6 +8,7 @@ import "./style.sass";
 const Exam = (props) => {
   const [count, setCount] = useState(false);
   const settings = props.exam && props.exam.settings;
+  const started = props.exam && props.exam.started;
   const questions = props.exam && props.exam.questions;
   const students = [
     { name: "Charlie Brown", status: "connected" },
@@ -19,21 +20,30 @@ const Exam = (props) => {
     props.getExam();
     props.getAnswers();
   }, []);
+
+  const beginExam = () => {
+    props.getExam();
+  };
+
   return (
     <div className="exam">
       {/*<TeacherExamView*/}
       {/*  settings={settings}*/}
-      {/*  count={count}*/}
-      {/*  setCount={setCount}*/}
       {/*  answers={props.answers}*/}
       {/*  questions={questions}*/}
       {/*  students={students}*/}
+      {/*  started={started}*/}
+      {/*  startExam={props.startExam}*/}
+      {/*  loading={props.loading}*/}
       {/*/>*/}
       <StudentExamView
         questions={questions}
         answers={props.answers}
         count={count}
         settings={settings}
+        started={started}
+        beginExam={beginExam}
+        loading={props.loading}
       />
     </div>
   );
@@ -46,5 +56,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { getExam, getAnswers };
+const mapDispatchToProps = { getExam, getAnswers, startExam };
 export default connect(mapStateToProps, mapDispatchToProps)(Exam);

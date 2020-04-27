@@ -45,5 +45,6 @@ export default {
   exam: {
     selectExam: (data) => exam.doc("1").set(data),
     getExam: () => exam.get(),
+    startExam: () => exam.doc("1").update({ started: true }),
   },
 };

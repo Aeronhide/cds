@@ -16,7 +16,7 @@ const SettingExams = (props) => {
   }, []);
 
   const selectExam = (item) => {
-    props.selectExam(item);
+    props.selectExam({ ...item, started: false });
     history.push("/exam");
   };
 

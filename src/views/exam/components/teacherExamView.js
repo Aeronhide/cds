@@ -11,16 +11,16 @@ import {
   Avatar,
   Tooltip,
 } from "antd";
-import { getAnswers, getExam } from "../../../actions";
 import Timer from "../../../helpers/timer";
 
 const TeacherExamView = ({
-  count,
-  setCount,
   settings,
   questions,
   answers,
   students,
+  started,
+  startExam,
+  loading,
 }) => {
   const { Title } = Typography;
 
@@ -64,12 +64,16 @@ const TeacherExamView = ({
                 </Col>
                 <Col md={4}>
                   <Title level={4}>
-                    <Timer time={settings.duration} paused={count} />
+                    <Timer time={settings.duration} paused={started} />
                   </Title>
                 </Col>
                 <Col md={4}>
-                  <Button onClick={() => setCount(!count)} type="primary">
-                    {count ? "Pause Exam" : "Start Exam"}
+                  <Button
+                    loading={loading}
+                    onClick={() => startExam()}
+                    type="primary"
+                  >
+                    Start Exam
                   </Button>
                 </Col>
               </Row>
@@ -169,5 +173,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { getExam, getAnswers };
+const mapDispatchToProps = {};
 export default connect(mapStateToProps, mapDispatchToProps)(TeacherExamView);
