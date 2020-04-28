@@ -8,6 +8,7 @@ import {
   answersReducer,
   examsReducer,
   examReducer,
+  loginReducer,
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   exams: examsReducer,
   exam: examReducer,
   loading: globalReducer,
+  login: loginReducer,
 });
 
 const configStore = () => {

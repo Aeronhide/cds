@@ -4,7 +4,7 @@ import { Router } from "react-router-dom";
 import history from "./utils/history";
 import Routes from "./routes";
 import { Provider } from "react-redux";
-
+import "./app.sass";
 const store = configStore();
 
 const App = () => {

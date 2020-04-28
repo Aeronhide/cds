@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import firebase from "firebase";
 import "./style.sass";
 
 const Profile = () => {

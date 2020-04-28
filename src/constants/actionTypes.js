@@ -42,3 +42,8 @@ export const GET_EXAM = "GET_EXAM";
 export const START_EXAM = "START_EXAM";
 export const END_EXAM = "END_EXAM";
 export const FINISH_EXAM = "FINISH_EXAM";
+
+//LOGIN
+
+export const SIGN_IN = "SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";

@@ -8,6 +8,13 @@ const exams = db.collection("exams");
 const exam = db.collection("exam");
 
 export default {
+  login: {
+    signIn: (data) =>
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(`${data.username}`, `${data.password}`),
+    signOut: () => firebase.auth().signOut(),
+  },
   themes: {
     getThemes: () => themes.get(),
     addTheme: (theme) => themes.doc(`${theme.key}`).set(theme),

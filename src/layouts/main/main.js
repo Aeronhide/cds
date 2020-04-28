@@ -1,14 +1,37 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-import { Layout, Menu, Avatar, Button } from "antd";
-import { UserOutlined, BellOutlined } from "@ant-design/icons";
+import { Layout, Menu, Dropdown, Button } from "antd";
+import {
+  UserOutlined,
+  BellOutlined,
+  PoweroffOutlined,
+} from "@ant-design/icons";
 import menuList from "./menuList";
+import { logout } from "../../actions";
 import "./main.sass";
 
 const Main = (props) => {
   const { Header, Content, Footer, Sider } = Layout;
   const location = useLocation();
   const { children } = props;
+
+  const menu =
+    localStorage.getItem("user") === "student"
+      ? menuList.filter(
+          (m) => m.title !== "Themes" && m.title !== "Setting exams"
+        )
+      : menuList;
+
+  const userMenu = (
+    <Menu>
+      <Menu.Item key="0">
+        <Button onClick={() => props.logout()} icon={<PoweroffOutlined />}>
+          Log Out
+        </Button>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <div className="main-layout">
       <Layout className="main-layout_section">
@@ -16,16 +39,20 @@ const Main = (props) => {
           <div className="logo">CDS</div>
           <div className="layout-header_tools">
             <Button type="link" icon={<BellOutlined />} />
-            <Avatar
-              icon={<UserOutlined />}
-              className="layout-header_tools_avatar"
-            />
+            <Dropdown overlay={userMenu} trigger={["click"]}>
+              <Button
+                shape="circle"
+                className="layout-header_tools_avatar"
+                icon={<UserOutlined />}
+                onClick={(e) => e.preventDefault()}
+              />
+            </Dropdown>
           </div>
         </Header>
         <Layout className="main-layout_section_inner-layout">
           <Sider breakpoint="lg" collapsedWidth="0" theme="light">
             <Menu theme="light" mode="vertical">
-              {menuList.map((item, i) => (
+              {menu.map((item, i) => (
                 <Menu.Item
                   key={i + 1}
                   className={
@@ -55,4 +82,11 @@ const Main = (props) => {
   );
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loading,
+  };
+};
+
+const mapDispatchToProps = { logout };
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

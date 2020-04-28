@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getExam, getAnswers, startExam } from "../../actions";
 import TeacherExamView from "./components/teacherExamView";
 import StudentExamView from "./components/studentExamView";
+import { ExportOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import "./style.sass";
 
 const Exam = (props) => {
-  const [count, setCount] = useState(false);
+  const history = useHistory();
+  const user = localStorage.getItem("user");
   const settings = props.exam && props.exam.settings;
   const started = props.exam && props.exam.started;
   const questions = props.exam && props.exam.questions;
@@ -27,24 +31,33 @@ const Exam = (props) => {
 
   return (
     <div className="exam">
-      {/*<TeacherExamView*/}
-      {/*  settings={settings}*/}
-      {/*  answers={props.answers}*/}
-      {/*  questions={questions}*/}
-      {/*  students={students}*/}
-      {/*  started={started}*/}
-      {/*  startExam={props.startExam}*/}
-      {/*  loading={props.loading}*/}
-      {/*/>*/}
-      <StudentExamView
-        questions={questions}
-        answers={props.answers}
-        count={count}
-        settings={settings}
-        started={started}
-        beginExam={beginExam}
-        loading={props.loading}
-      />
+      <div className="link-to-dashboard">
+        <Button
+          type="default"
+          onClick={() => history.push("/schedule")}
+          icon={<ExportOutlined />}
+        />
+      </div>
+      {user === "teacher" ? (
+        <TeacherExamView
+          settings={settings}
+          answers={props.answers}
+          questions={questions}
+          students={students}
+          started={started}
+          startExam={props.startExam}
+          loading={props.loading}
+        />
+      ) : (
+        <StudentExamView
+          questions={questions}
+          answers={props.answers}
+          settings={settings}
+          started={started}
+          beginExam={beginExam}
+          loading={props.loading}
+        />
+      )}
     </div>
   );
 };
