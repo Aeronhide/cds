@@ -16,9 +16,9 @@ export const selectExam = (exam) => (dispatch) => {
   });
 };
 
-export const startExam = () => (dispatch) => {
+export const startExam = (time) => (dispatch) => {
   dispatch({ type: LOADING, payload: true });
-  return api.exam.startExam().then(() => {
+  return api.exam.startExam(time).then(() => {
     dispatch({ type: START_EXAM, payload: true });
     return api.exam.getExam().then((res) => {
       dispatch({

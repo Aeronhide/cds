@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import firebase from "../../config/firebase";
 import { useHistory } from "react-router-dom";

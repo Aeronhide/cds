@@ -1,14 +1,14 @@
-create - c
-get - g
-update - u
-delete - d
+profile
+    personal info
+    add exams questions list
+    grade of previous exams
 
-cgud -> themes / questions / answers
-        exams
-        lesson
-        notification
-        teacher
-        student
-
-gu   -> profile
+notifications
+    lesson will not be
+    lesson be later
+    exam will start in
+    exam change date
+    questions to exam added
+    university will not work at
+    add personal info
 

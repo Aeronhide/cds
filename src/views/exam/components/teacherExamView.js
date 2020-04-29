@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "antd";
 import Timer from "../../../helpers/timer";
+import moment from "moment";
 
 const TeacherExamView = ({
   settings,
@@ -23,6 +24,7 @@ const TeacherExamView = ({
   loading,
 }) => {
   const { Title } = Typography;
+  const time = moment(new Date()).format("HH:mm:ss");
 
   return (
     <div className="teacher-view">
@@ -64,13 +66,13 @@ const TeacherExamView = ({
                 </Col>
                 <Col md={4}>
                   <Title level={4}>
-                    <Timer time={settings.duration} paused={started} />
+                    <Timer time={settings.duration} paused={!started} />
                   </Title>
                 </Col>
                 <Col md={4}>
                   <Button
                     loading={loading}
-                    onClick={() => startExam()}
+                    onClick={() => startExam(time)}
                     type="primary"
                   >
                     Start Exam

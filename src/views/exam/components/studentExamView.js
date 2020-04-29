@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Button, Card, Col, Row, Checkbox, Typography, Modal } from "antd";
 import "../style.sass";
+import moment from "moment";
+import Timer from "../../../helpers/timer";
 // import Timer from "../../../helpers/timer";
 
 const StudentExamView = ({
@@ -13,10 +15,20 @@ const StudentExamView = ({
   questions,
   beginExam,
   started,
+  time,
 }) => {
   const { Title } = Typography;
   const [data, setData] = useState({});
   const history = useHistory();
+  const startTime = moment();
+  const endTime = moment(time, "HH:mm:ss").add("2", "hours");
+  const remainedTime = endTime.diff(startTime);
+  const hours = Math.floor(
+    (remainedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((remainedTime % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((remainedTime % (1000 * 60)) / 1000);
+  const timerTime = `${hours}:${minutes}:${seconds}`;
   const selectAnswer = (question, answer) => {
     if (
       (data[question] && !data[question].includes(answer)) ||
@@ -113,6 +125,12 @@ const StudentExamView = ({
     });
   };
 
+  const timeFinished = (val) => {
+    if (val) {
+      finish();
+    }
+  };
+
   return (
     <div className="student-view">
       {started ? (
@@ -166,7 +184,13 @@ const StudentExamView = ({
                   <Title level={3}>Time remained: </Title>
                 </Col>
                 <Col xs={24} md={20}>
-                  <Title level={4}>{settings && settings.duration}</Title>
+                  <Title level={4}>
+                    <Timer
+                      time={timerTime}
+                      paused={!started}
+                      timeEnded={timeFinished}
+                    />
+                  </Title>
                 </Col>
               </Row>
             </Col>

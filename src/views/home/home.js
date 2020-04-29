@@ -15,6 +15,7 @@ const Home = () => {
           icon={<ExportOutlined />}
         />
       </div>
+      <div>home</div>
     </div>
   );
 };

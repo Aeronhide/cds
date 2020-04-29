@@ -14,6 +14,7 @@ const Exam = (props) => {
   const settings = props.exam && props.exam.settings;
   const started = props.exam && props.exam.started;
   const questions = props.exam && props.exam.questions;
+  const timeToEnd = props.exam && props.exam.startedTime;
   const students = [
     { name: "Charlie Brown", status: "connected" },
     { name: "Charlie Brown", status: "disconnected" },
@@ -55,6 +56,7 @@ const Exam = (props) => {
           settings={settings}
           started={started}
           beginExam={beginExam}
+          time={timeToEnd}
           loading={props.loading}
         />
       )}
