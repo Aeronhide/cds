@@ -4,9 +4,7 @@ import {
   GET_EXAM_QUESTIONS,
   SET_EXAM_THEMES,
   SET_EXAM_SETTINGS,
-  CREATE_EXAM,
   LOAD_EXAMS,
-  SELECT_EXAM,
 } from "../constants/actionTypes";
 
 const initialState = {

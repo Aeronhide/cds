@@ -5,3 +5,4 @@ export * from "./answersActions";
 export * from "./examsActions";
 export * from "./examActions";
 export * from "./loginActions";
+export * from "./notificationsActions";

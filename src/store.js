@@ -9,6 +9,7 @@ import {
   examsReducer,
   examReducer,
   loginReducer,
+  notificationsReducer,
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   exam: examReducer,
   loading: globalReducer,
   login: loginReducer,
+  notifications: notificationsReducer,
 });
 
 const configStore = () => {

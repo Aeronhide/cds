@@ -12,3 +12,8 @@ notifications
     university will not work at
     add personal info
 
+list
+    key
+    message
+    date
+    user

@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { Layout, Menu, Dropdown, Button } from "antd";
 import {
-  UserOutlined,
+  SettingOutlined,
   BellOutlined,
   PoweroffOutlined,
 } from "@ant-design/icons";
 import menuList from "./menuList";
 import { logout } from "../../actions";
 import "./main.sass";
+import Notifications from "../../components/notifications/notifications";
 
 const Main = (props) => {
   const { Header, Content, Footer, Sider } = Layout;
   const location = useLocation();
   const { children } = props;
+  const [visibleDrawer, setVisibleDrawer] = useState(false);
 
   const menu =
     localStorage.getItem("user") === "student"
@@ -34,16 +36,24 @@ const Main = (props) => {
   );
   return (
     <div className="main-layout">
+      <Notifications
+        visibleDrawer={visibleDrawer}
+        setVisibleDrawer={setVisibleDrawer}
+      />
       <Layout className="main-layout_section">
         <Header className="layout-header">
           <div className="logo">CDS</div>
           <div className="layout-header_tools">
-            <Button type="link" icon={<BellOutlined />} />
+            <Button
+              onClick={() => setVisibleDrawer(true)}
+              type="link"
+              icon={<BellOutlined />}
+            />
             <Dropdown overlay={userMenu} trigger={["click"]}>
               <Button
                 shape="circle"
                 className="layout-header_tools_avatar"
-                icon={<UserOutlined />}
+                icon={<SettingOutlined />}
                 onClick={(e) => e.preventDefault()}
               />
             </Dropdown>
