@@ -7,6 +7,7 @@ const answers = db.collection("answers");
 const exams = db.collection("exams");
 const exam = db.collection("exam");
 const not = db.collection("notifications");
+const schedule = db.collection("schedule");
 
 export default {
   login: {
@@ -60,5 +61,9 @@ export default {
     getNotifications: () => not.get(),
     addNotification: (n) => not.doc(`${n.key}`).set(n),
     expired: (n) => not.doc(`${n.key}`).delete(),
+  },
+  schedule: {
+    getSchedule: () => schedule.get(),
+    addLesson: (lesson) => schedule.doc(`${lesson.key}`).set(lesson),
   },
 };

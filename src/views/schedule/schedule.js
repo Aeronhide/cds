@@ -1,76 +1,150 @@
-import React from "react";
-import { Calendar, Badge } from "antd";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import moment from "moment";
+import firebase from "../../config/firebase";
+import {
+  Calendar,
+  Timeline,
+  Button,
+  Popover,
+  Input,
+  DatePicker,
+  List,
+} from "antd";
+import { getSchedule, addlesson } from "../../actions";
 import "./style.sass";
+import ModalSchedule from "./components/modal";
 
-const Schedule = () => {
-  const getListData = (value) => {
-    let listData;
-    switch (value.date()) {
-      case 8:
-        listData = [
-          { type: "warning", content: "This is warning event." },
-          { type: "success", content: "This is usual event." },
-          { type: "success", content: "This is usual event." },
-        ];
-        break;
-      case 10:
-        listData = [
-          { type: "warning", content: "This is warning event." },
-          { type: "success", content: "This is usual event." },
-          { type: "error", content: "This is error event." },
-        ];
-        break;
-      case 15:
-        listData = [
-          { type: "warning", content: "This is warning event" },
-          { type: "success", content: "This is very long usual event。。...." },
-          { type: "error", content: "This is error event 1." },
-          { type: "error", content: "This is error event 2." },
-          { type: "error", content: "This is error event 3." },
-          { type: "error", content: "This is error event 4." },
-        ];
-        break;
-      default:
-    }
-    return listData || [];
+const Schedule = (props) => {
+  const [data, setData] = useState({
+    day: "",
+    date: "",
+    list: [],
+    teacher: "",
+  });
+  const [lesson, setLesson] = useState("");
+  const [date, setDate] = useState("");
+  const [visiblePop, setVisiblePop] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(moment);
+
+  useEffect(() => {
+    props.getSchedule();
+  }, []);
+
+  const add = () => {
+    setData({
+      key: moment(date).format("DD-MM-YYYY"),
+      day: moment(date).format("D"),
+      date: moment(date).format("DD-MM-YYYY HH:ss:mm"),
+      list: [...data.list, { lesson }],
+      teacher: firebase.auth().currentUser && firebase.auth().currentUser.email,
+    });
+    setLesson("");
+  };
+
+  const save = () => {
+    props.addlesson(data);
+    setVisiblePop(false);
+  };
+
+  const openModal = (day) => {
+    setSelectedDay(day);
+    setVisibleModal(true);
   };
 
   const dateCellRender = (value) => {
-    const listData = getListData(value);
     return (
-      <ul className="events">
-        {listData.map((item, index) => (
-          <li key={item.content + index}>
-            <Badge status={item.type} text={item.content} />
-          </li>
-        ))}
-      </ul>
+      <div>
+        {props.schedule.length &&
+          props.schedule.map(
+            (item) =>
+              parseInt(item.day, 10) === value.date() && (
+                <Timeline key={item.date} className="timeline">
+                  {item.list.map((les) => (
+                    <Timeline.Item key={les.lesson} className="timeline_item">
+                      {les.lesson}
+                    </Timeline.Item>
+                  ))}
+                </Timeline>
+              )
+          )}
+      </div>
     );
   };
 
-  const getMonthData = (value) => {
-    if (value.month() === 8) {
-      return 1394;
-    }
-  };
-
-  const monthCellRender = (value) => {
-    const num = getMonthData(value);
-    return num ? (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
-      </div>
-    ) : null;
-  };
-
   return (
-    <Calendar
-      className="schedule"
-      dateCellRender={dateCellRender}
-      monthCellRender={monthCellRender}
-    />
+    <div>
+      <ModalSchedule
+        visibleModal={visibleModal}
+        day={selectedDay}
+        setVisibleModal={setVisibleModal}
+      />
+      <Popover
+        content={
+          <div className="add-lesson">
+            <DatePicker
+              className="add-lesson_item"
+              allowClear
+              showTime
+              value={date}
+              onChange={(e) => setDate(e)}
+            />
+            <Input
+              className="add-lesson_item"
+              autoFocus
+              onChange={(e) => setLesson(e.target.value)}
+              onKeyDown={(e) => e.keyCode === 13 && add()}
+              value={lesson}
+            />
+            <List
+              className="add-lesson_item"
+              dataSource={data.list}
+              renderItem={(item) => (
+                <List.Item>
+                  <div>{item.lesson}</div>
+                </List.Item>
+              )}
+            />
+            <Button onClick={add} className="add-lesson_item">
+              Add
+            </Button>
+            <Button onClick={save} className="add-lesson_item" type="primary">
+              Save
+            </Button>
+            <Button
+              onClick={() => setVisiblePop(false)}
+              className="add-lesson_item"
+              type="default"
+            >
+              Cancel
+            </Button>
+          </div>
+        }
+        title="Add new lesson"
+        placement="bottomLeft"
+        trigger="click"
+        visible={visiblePop}
+      >
+        <Button onClick={() => setVisiblePop(true)} type="primary">
+          Add lessons
+        </Button>
+      </Popover>
+      <Calendar
+        className="schedule"
+        dateCellRender={dateCellRender}
+        onSelect={openModal}
+      />
+    </div>
   );
 };
 
-export default Schedule;
+const mapStateToProps = (state) => {
+  return {
+    schedule: state.schedule,
+    loading: state.loading,
+  };
+};
+
+const mapDispatchToProps = { getSchedule, addlesson };
+export default connect(mapStateToProps, mapDispatchToProps)(Schedule);

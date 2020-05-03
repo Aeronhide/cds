@@ -6,3 +6,4 @@ export * from "./examsReducer";
 export * from "./examReducer";
 export * from "./loginReducer";
 export * from "./notificationsReducer";
+export * from "./scheduleReducer";

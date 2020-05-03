@@ -30,10 +30,6 @@ const Notifications = (props) => {
     props.getNotifications();
   }, []);
 
-  const setMessage = (e) => {
-    setInfo({ ...info, message: e.target.value });
-  };
-
   useEffect(() => {
     props.notifications &&
       props.notifications.map(
@@ -42,6 +38,10 @@ const Notifications = (props) => {
           props.expired(item)
       );
   }, []);
+
+  const setMessage = (e) => {
+    setInfo({ ...info, message: e.target.value });
+  };
 
   const setDate = (val) => {
     setInfo({
