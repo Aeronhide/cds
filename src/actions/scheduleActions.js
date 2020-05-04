@@ -12,9 +12,9 @@ export const getSchedule = () => (dispatch) => {
   });
 };
 
-export const addlesson = (lesson) => (dispatch) => {
+export const addEvent = (event) => (dispatch) => {
   dispatch({ type: LOADING, payload: true });
-  return api.schedule.addLesson(lesson).then(() => {
+  return api.schedule.addEvent(event).then(() => {
     dispatch({ type: SET_LESSON });
     return api.schedule.getSchedule().then((res) => {
       dispatch({

@@ -2,7 +2,12 @@
   width: 100%
   height: 100%
 
-  .events
+  &_actions
+    display: flex
+
+
+  &_calendar
+    .events
     list-style: none
     margin: 0
     padding: 0
@@ -27,8 +32,41 @@
     &_item
       padding-bottom: 10px
 
+.modal-event
+  .ant-modal-content
+    .ant-modal-body
+      padding-top: 20px !important
+
 .add-lesson
   &_item
     width: 100%
     margin-bottom: 10px !important
+
+  &_item-lesson
+    display: flex
+
+    &_input
+      margin-right: 10px !important
+
+    &_time
+      width: 170px
+
+.add-exam
+  width: 300px
+
+  &_item
+    width: 100%
+    margin-bottom: 10px !important
+
+.exam-day
+  width: 100%
+  height: 100%
+  padding: 15px 0
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  background: #ff8a24
+
+
 

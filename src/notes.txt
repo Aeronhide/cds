@@ -1,19 +1,5 @@
 profile
     personal info
     add exams questions list
+
     grade of previous exams
-
-notifications
-    lesson will not be
-    lesson be later
-    exam will start in
-    exam change date
-    questions to exam added
-    university will not work at
-    add personal info
-
-list
-    key
-    message
-    date
-    user

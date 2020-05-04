@@ -64,6 +64,6 @@ export default {
   },
   schedule: {
     getSchedule: () => schedule.get(),
-    addLesson: (lesson) => schedule.doc(`${lesson.key}`).set(lesson),
+    addEvent: (event) => schedule.doc(`${event.key}`).set(event),
   },
 };
