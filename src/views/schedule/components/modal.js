@@ -34,7 +34,7 @@ const ModalSchedule = (props) => {
                     ))}
                   </Timeline>
                 ) : (
-                  <div>
+                  <div key={item.date}>
                     <h3>{item.subject + " "}</h3>{" "}
                     <span>
                       {moment(item.date, "DD-MM-YYYY HH:mm:ss").format(

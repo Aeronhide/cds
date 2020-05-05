@@ -9,8 +9,8 @@ import {
 } from "@ant-design/icons";
 import menuList from "./menuList";
 import { logout } from "../../actions";
-import "./main.sass";
 import Notifications from "../../components/notifications/notifications";
+import "./main.sass";
 
 const Main = (props) => {
   const { Header, Content, Footer, Sider } = Layout;

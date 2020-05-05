@@ -3,7 +3,6 @@ import { Main, Minimal } from "../layouts";
 import Questions from "../views/themes/components/questions";
 import ExamSetUp from "../views/exam/components/examSetUp";
 import SettingExams from "../views/exam/components/settingExams";
-import Login from "../views/login/login";
 
 export const routes = [
   {

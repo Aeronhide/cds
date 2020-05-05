@@ -1,5 +1,5 @@
 profile
-    personal info
+    personal info ( name, surname, phone, )
     add exams questions list
 
     grade of previous exams
