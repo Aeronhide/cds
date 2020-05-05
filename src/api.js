@@ -8,6 +8,7 @@ const exams = db.collection("exams");
 const exam = db.collection("exam");
 const not = db.collection("notifications");
 const schedule = db.collection("schedule");
+const users = db.collection("users");
 
 export default {
   login: {
@@ -65,5 +66,9 @@ export default {
   schedule: {
     getSchedule: () => schedule.get(),
     addEvent: (event) => schedule.doc(`${event.key}`).set(event),
+  },
+  users: {
+    getUsers: () => users.get(),
+    updateUser: (user) => users.doc(`${user.email}`).set(user),
   },
 };

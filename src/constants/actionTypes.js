@@ -40,8 +40,6 @@ export const GET_EXAM_QUESTIONS = "GET_EXAM_QUESTIONS";
 
 export const GET_EXAM = "GET_EXAM";
 export const START_EXAM = "START_EXAM";
-export const END_EXAM = "END_EXAM";
-export const FINISH_EXAM = "FINISH_EXAM";
 
 //LOGIN
 
@@ -58,3 +56,8 @@ export const NOTIFICATION_EXPIRED = "NOTIFICATION_EXPIRED";
 
 export const GET_SCHEDULE = "GET_SCHEDULE";
 export const SET_LESSON = "SET_LESSON";
+
+//USERS
+
+export const GET_USERS = "GET_USERS";
+export const UPDATE_USER = "UPDATE_USER";

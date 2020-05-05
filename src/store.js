@@ -11,6 +11,7 @@ import {
   loginReducer,
   notificationsReducer,
   scheduleReducer,
+  usersReducer,
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   notifications: notificationsReducer,
   schedule: scheduleReducer,
+  users: usersReducer,
 });
 
 const configStore = () => {

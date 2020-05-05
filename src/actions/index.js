@@ -7,3 +7,4 @@ export * from "./examActions";
 export * from "./loginActions";
 export * from "./notificationsActions";
 export * from "./scheduleActions";
+export * from "./userActions";
