@@ -1,18 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import moment from "moment";
-import { Modal, Timeline } from "antd";
+import { removeEvent } from "../../../actions";
+import { message, Modal, Timeline } from "antd";
 import "../style.sass";
 
 const ModalSchedule = (props) => {
   const selectedDay = props.day && props.day.format("D");
+  const removeRecord = (date) => {
+    props.removeEvent(moment(date).format("DD-MM-YYYY"));
+    props.setVisibleModal(false);
+    message.success("Data removed");
+  };
+
   return (
     <div>
       <Modal
         title={moment(props.day).format("DD dddd MMMM YYYY")}
         visible={props.visibleModal}
         onOk={() => props.setVisibleModal(false)}
-        onCancel={() => props.setVisibleModal(false)}
+        onCancel={() => removeRecord(props.day)}
+        okText="Close"
+        cancelText="Remove"
         className="modal-event"
       >
         <div>
@@ -57,5 +66,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { removeEvent };
 export default connect(mapStateToProps, mapDispatchToProps)(ModalSchedule);

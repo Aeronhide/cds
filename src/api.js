@@ -66,6 +66,7 @@ export default {
   schedule: {
     getSchedule: () => schedule.get(),
     addEvent: (event) => schedule.doc(`${event.key}`).set(event),
+    removeEvent: (event) => schedule.doc(`${event}`).delete(),
   },
   users: {
     getUsers: () => users.get(),

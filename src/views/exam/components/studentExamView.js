@@ -68,10 +68,11 @@ const StudentExamView = ({
       )
       .filter((a) => a !== undefined).length;
     const grade = (answered / total).toFixed(2) * 100;
-    infoModal(total, answered, grade);
+    const note = total * (grade / 100);
+    infoModal(total, answered, grade, note);
   };
 
-  const infoModal = (total, answered, grade) => {
+  const infoModal = (total, answered, grade, note) => {
     Modal.info({
       title: "Your result",
       maskStyle: { background: "#383838" },
@@ -115,6 +116,14 @@ const StudentExamView = ({
             </Col>
             <Col md={8}>
               <Title level={4}>{grade} %</Title>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={16}>
+              <Title level={4}>Subject grade:</Title>
+            </Col>
+            <Col md={8}>
+              <Title level={4}>{note}</Title>
             </Col>
           </Row>
         </div>

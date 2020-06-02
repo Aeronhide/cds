@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import firebase from "../../config/firebase";
 import { Calendar, Timeline } from "antd";
-import { getSchedule, addEvent } from "../../actions";
+import { getSchedule, addEvent, removeEvent } from "../../actions";
 import ModalSchedule from "./components/modal";
 import PopLesson from "./components/popLesson";
 import PopExam from "./components/popExam";
